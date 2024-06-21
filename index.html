@@ -13,13 +13,14 @@
             align-items: center;
             height: 100vh;
             background: linear-gradient(169deg, #80A3FF 0%, #7098FF 100%);
+            overflow: hidden;
         }
 
         #quiz-container {
             width: 100%;
             max-width: 800px;
             min-width: 300px;
-            height: 80%;
+            height: 100%;
             max-height: 800px;
             min-height: 500px;
             position: relative;
@@ -27,13 +28,12 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-top: 60px; /* Espaço para a barra de progresso */
         }
 
         .progress-bar {
             width: 80%;
             max-width: 600px;
-            min-width: 300px;
+            min-width: 200px;
             height: 12px;
             background: #D9D9D9;
             border-radius: 12px;
@@ -53,14 +53,13 @@
         .quiz-page {
             width: 100%;
             height: 100%;
-            display: flex;
+            display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: absolute;
             top: 0;
             left: 0;
-            display: none;
         }
 
         .quiz-page.active {
@@ -70,7 +69,7 @@
         .question-box {
             width: 80%;
             max-width: 600px;
-            min-width: 300px;
+            min-width: 200px;
             margin: 10px 0;
             padding: 10px;
             background: #fff;
@@ -83,9 +82,9 @@
         .option {
             width: 80%;
             max-width: 600px;
-            min-width: 300px;
+            min-width: 200px;
             margin: 10px 0;
-            padding: 10px 0;
+            padding: 10px;
             background: #FFE16E;
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             border-radius: 8px;
@@ -96,6 +95,7 @@
             cursor: pointer;
         }
 
+        /* Página inicial */
         .quiz-page#page1 {
             display: flex;
         }
@@ -138,18 +138,18 @@
             <div class="question-box">
                 <p>Você gostaria de um plano que complemente as terapias tradicionais com atividades em casa?</p>
             </div>
-            <div class="option">Sim, um plano claro seria ótimo.</div>
-            <div class="option">Talvez, se for fácil de seguir.</div>
-            <div class="option">Não, prefiro focar apenas nas terapias.</div>
+            <div class="option" onclick="redirectToLink()">Sim, um plano claro seria ótimo.</div>
+            <div class="option" onclick="redirectToLink()">Talvez, se for fácil de seguir.</div>
+            <div class="option" onclick="redirectToLink()">Não, prefiro focar apenas nas terapias.</div>
         </div>
     </div>
     <script>
         function nextPage(pageId) {
             let pages = document.getElementsByClassName('quiz-page');
             for (let i = 0; i < pages.length; i++) {
-                pages[i].classList.remove('active');
+                pages[i].style.display = 'none'; // Oculta todas as páginas
             }
-            document.getElementById(pageId).classList.add('active');
+            document.getElementById(pageId).style.display = 'flex'; // Mostra a página ativa
 
             // Atualiza a barra de progresso conforme a página
             const progressBar = document.querySelector('.progress');
@@ -166,14 +166,6 @@
         function redirectToLink() {
             window.location.href = "https://kiwify.app/lms5tRJ?afid=pORlTFzU";
         }
-
-        // Adiciona o evento de clique para os botões da página 4
-        document.addEventListener("DOMContentLoaded", function() {
-            const page4Buttons = document.querySelectorAll("#page4 .option");
-            page4Buttons.forEach(button => {
-                button.addEventListener("click", redirectToLink);
-            });
-        });
     </script>
 </body>
 </html>
